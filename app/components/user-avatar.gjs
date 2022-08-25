@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import { registerDestructor } from '@glimmer/destroyable';
+import { registerDestructor, associateDestroyableChild } from '@glimmer/destroyable';
 import { service } from "@ember/service";
 import { tracked } from "@glimmer/tracking";
 
@@ -13,6 +13,6 @@ export default class UserAvatarComponent extends Component {
   constructor(...args) {
     super(...args);
 
-    registerDestructor(this, this.currentUser.tracking());
+    this.currentUser.tracking().link(this);
   }
 }
